@@ -1,0 +1,17 @@
+Id = 0
+
+[Main]
+Title = "RF Online Localhost Launcher"
+UiType = "nwjs-bootstrap"
+
+[Network]
+Ip = "107.0.0.1"
+LoginPort = 10001
+PlusSalt = 1
+XorSalt = 3
+PreferIndex = 0
+
+[Features]
+UseUpdate = false
+UseChisel = false
+UseDefence = false
