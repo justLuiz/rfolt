@@ -1,6 +1,6 @@
 package config
 
-const CfgServerUrl = "http://127.0.0.1:9411"
+const CfgServerUrl = "http://178.128.203.194:9411"
 
 var serverId string
 

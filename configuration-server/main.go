@@ -37,7 +37,7 @@ func main() {
 		})
 	})
 
-	server.Run("127.0.0.1:9411")
+	server.Run(":9411")
 }
 
 func getAllConfigs(dir string) map[string]configuration.Config {
