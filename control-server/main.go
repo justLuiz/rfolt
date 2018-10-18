@@ -12,29 +12,33 @@ import (
 )
 
 func main() {
-	//получим конфиги
+	//Получим конфиги
 	configs := getAllConfigs("./enabled")
 
 	//Запустим http сервер
 	server := neko.Classic()
 
-	//Комманда перезагрузки
-	server.POST("/jx5xyi5xfr2cv2qxxako1jx8o762r5lt", func(ctx *neko.Context) {
+	//Комманда перезагрузки данных сервера
+	server.POST("/jx5xyi5xfr2cv21jx8o762r5lt", func(ctx *neko.Context) {
 		configs = getAllConfigs("./enabled")
 		ctx.Text("OK", http.StatusOK)
 	})
 
-	//Роуты конфигов
 	server.Group("/:id", func(router *neko.RouterGroup) {
-		router.GET("/main", func(ctx *neko.Context) {
-			ctx.Json(configs[ctx.Params.ByGet("id")].Main, http.StatusOK)
+		//API конфигов
+		router.Group("/configuration", func(*neko.RouterGroup) {
+			router.GET("/main", func(ctx *neko.Context) {
+				ctx.Json(configs[ctx.Params.ByGet("id")].Main, http.StatusOK)
+			})
+			router.GET("/network", func(ctx *neko.Context) {
+				ctx.Json(configs[ctx.Params.ByGet("id")].Network, http.StatusOK)
+			})
+			router.GET("/features", func(ctx *neko.Context) {
+				ctx.Json(configs[ctx.Params.ByGet("id")].Features, http.StatusOK)
+			})
 		})
-		router.GET("/network", func(ctx *neko.Context) {
-			ctx.Json(configs[ctx.Params.ByGet("id")].Network, http.StatusOK)
-		})
-		router.GET("/features", func(ctx *neko.Context) {
-			ctx.Json(configs[ctx.Params.ByGet("id")].Features, http.StatusOK)
-		})
+
+		//todo: API связи с бд
 	})
 
 	server.Run(":9411")
